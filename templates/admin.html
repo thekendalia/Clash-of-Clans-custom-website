@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="center-div">
+    <table class="table-admin" style="background-color: black; color: white;">
+        <thead>
+            <tr>
+                <th scope="col" style="background-color: black; color: white;">Clash Username</th>
+                <th scope="col" style="background-color: black; color: white;">Opt-In</th>
+                <th scope="col" style="background-color: black; color: white;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dark in rose %}
+            <tr style="background-color: black; color: white;">
+                <td style="background-color: black; color: white;">{{ dark.clashname }}</td>
+                <td style="background-color: black; color: white;">{{ "Yes" if dark.optin else "No" }}</td>
+                <td style="background-color: black; color: white;">
+                    <form action="/delete" method="post">
+                        <input type="hidden" name="entry_id" value="{{ dark.id }}">
+                        <button type="submit" class="btn btn-danger" style="color: white;">Delete Entry</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,152 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="form-overlay mobile-padding">
+	<div class="center-text">
+        <h3>Security Check</h3>
+        <h5>What Town Hall Are you {{ name }}?</h5>
+	<h6></h6>
+    </div>
+    <form id="infoForm" method="get" action="/auth">
+        <div class="form-group">
+            <label style="color: white;" for="name">Town Hall level:</label>
+            <input type="number" class="form-control" id="thlvl" name="thlvl" placeholder="ex. 16" min="1" max="16">
+            <div style="color: white" id="nameSuggestions" class="suggestions-container"></div>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+
+
+
+
+<script>
+    
+    var maxx = document.body.clientWidth;
+    var maxy = document.body.clientHeight;
+    var halfx = maxx / 2;
+    var halfy = maxy / 2;
+    var canvas = document.createElement("canvas");
+    document.body.appendChild(canvas);
+    canvas.width = maxx;
+    canvas.height = maxy;
+    var context = canvas.getContext("2d");
+    var dotCount = 200;
+    var dots = [];
+    for (var i = 0; i < dotCount; i++) {
+        dots.push(new dot());
+    }
+
+    function render() {
+        context.fillStyle = "#000000";
+        context.fillRect(0, 0, maxx, maxy);
+        for (var i = 0; i < dotCount; i++) {
+            dots[i].draw();
+            dots[i].move();
+        }
+        requestAnimationFrame(render);
+    }
+
+    function dot() {
+
+        this.rad_x = 2 * Math.random() * halfx + 1;
+        this.rad_y = 1.2 * Math.random() * halfy + 1;
+        this.alpha = Math.random() * 360 + 1;
+        this.speed = Math.random() * 100 < 50 ? 1 : -1;
+        this.speed *= 0.1;
+        this.size = Math.random() * 5 + 1;
+        this.color = Math.floor(Math.random() * 256);
+
+    }
+
+    dot.prototype.draw = function () {
+
+        var dx = halfx + this.rad_x * Math.cos(this.alpha / 180 * Math.PI);
+        var dy = halfy + this.rad_y * Math.sin(this.alpha / 180 * Math.PI);
+        context.fillStyle = "rgb(" + this.color + "," + this.color + "," + this.color + ")";
+        context.fillRect(dx, dy, this.size, this.size);
+
+    };
+
+    dot.prototype.move = function () {
+
+        this.alpha += this.speed;
+        if (Math.random() * 100 < 50) {
+            this.color += 1;
+        } else {
+            this.color -= 1;
+        }
+
+    };
+
+    render();
+</script>
+<style>
+    .form-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background-color: black;
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%;
+    max-width: 600px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+.form-select {
+    width: 100%;
+    padding: 10px;
+}
+button {
+        display: block;
+        width: 100%;
+        padding: 20px;
+        background-color: #751212;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #c11515;
+    }
+
+@media (max-width: 768px) {
+    .form-overlay {
+        padding: 5%;
+        width: 80%;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 20px;
+        background-color: #751212;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #c11515;
+    }
+}
+
+</style>
+{% endblock %}

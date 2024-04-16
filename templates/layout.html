@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Dark Rose CWL</title>
+    <link rel="icon" href="static/images/DarkRose.gif" type="image/gif"> <!-- add your image here for navbar-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Rubik+Doodle+Shadow&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+    <script>
+        const memberNames = "{{ member_names }}"
+    </script>
+
+    <style>
+        @media (max-width: 768px) {
+            .navbar-collapse {
+                flex-direction: column;
+            }
+
+            .d-flex {
+                flex-direction: column;
+                align-items: start;
+            }
+            .table {
+                width: auto;
+            }
+
+        }
+
+        .new-custom-navbar-color {
+            background-color: #751212;
+
+        }
+
+        .custom-navbar-color {
+            background-color: black;
+        }
+        
+
+        .navbar {
+            z-index: 1000;
+            position: relative;
+        }
+
+        .navbar a {
+            color: white;
+            font-family: 'FantasyFont', sans-serif;
+        }
+
+        .centered-brand {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            pointer-events: auto;
+        }
+
+        .wrapper {
+            max-width: 2650px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: black;
+
+        }
+
+        .d-flex {
+            z-index: 1001;
+            position: relative;
+        }
+
+        .centered-brand a {
+            color: white;
+            font-family: "Lalezar", system-ui;
+            font-size: xx-large;
+            pointer-events: auto;
+            padding-right: 0%;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            opacity: 50%;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container form {
+            opacity: 0.9;
+        }
+
+        body,
+        canvas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .center-stats {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 100%;
+        }
+        .table-admin {
+            margin: 0;
+            text-align: center;
+            z-index: 1002;
+        }
+        .table-admin {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table-admin, .table-admin th, .table-admin td {
+            border: 1px solid white;
+            background-color: black;
+        }
+
+        .center-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .table {
+            margin: 0;
+            text-align: center;
+            z-index: 1002;
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .center-text {
+            text-align: center;
+            color: white;
+            font-family: "Lalezar", system-ui;
+            font-size: xx-large;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table, .table th, .table td {
+            border: 1px solid #751212;
+            background-color: black;
+            padding: 8px;
+            text-align: left;
+        }
+        .btn {
+            display: inline-block;
+            margin-right: 5px;
+        }
+        #table-wrapper {
+            position:relative;
+          }
+          #table-scroll {
+            height:300px;
+            overflow:auto;
+            margin-top:20px;
+          }
+          #table-wrapper table thead th .text {
+            position:fixed;   
+            top:-20px;
+            z-index:2;
+            height:20px;
+            width:20%;
+            border:1px solid red;
+          }
+          .opponent-column {
+            width: 20%;
+        }
+
+
+
+    </style>
+</head>
+
+<body class="wrapper">
+    <nav class="navbar navbar-expand-lg custom-navbar-color" style="position: fixed; width: 100%;">
+        <div class="container-fluid justify-content-center justify-content-lg-between">
+            <!-- Logo hidden on xs to md, visible on lg and above -->
+            <a class="navbar-brand d-flex align-items-center d-none d-lg-flex" href="/">
+                <img src="/static/images/DarkRose.gif" alt="Logo" style="height: 50px;">
+            </a>
+            <!-- Toggle button centered on all views, but especially for mobile -->
+            <button class="navbar-toggler btn btn-outline-light mx-auto new-custom-navbar-color" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navbar content -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Centered brand for mobile view -->
+                <div class="d-lg-none text-center my-2">
+                    <a class="navbar-brand" style="color: white;" aria-current="page">Dark Rose CWL Signup</a>
+                </div>
+                <!-- Admin Login button for mobile view, centered -->
+                {% if not no_search_bar %}
+                <div class="d-lg-none text-center my-2">
+                    <a class="btn btn-outline-light" href="#" role="button" data-bs-toggle="modal"
+                        data-bs-target="#adminLoginModal">Admin Login</a>
+                    <a class="btn btn-outline-light" href="/clanstats" role="button">Clan Stats</a>
+                </div>
+                {% endif %}
+                {%if homeie %}
+                <div class="d-lg-none text-center my-2">
+                    <a class="btn btn-outline-light" href="/" role="button">Home</a>
+                    <a class="btn btn-outline-light" href="/clanstats" role="button">Clan Stats</a>
+                </div>
+                {% endif %}
+                <!-- Additional navbar content for larger screens -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-lg-flex">
+                    <!-- Placeholder for navigation items on large screens -->
+                </ul>
+                <!-- Desktop Buttons, aligned to the right -->
+                <div class="ms-auto d-none d-lg-block">
+                    {% if not no_search_bar %}
+                    <a class="btn btn-outline-light" href="/" role="button">Home</a>
+                    <a class="btn btn-outline-light" href="#" role="button" data-bs-toggle="modal"
+                        data-bs-target="#adminLoginModal">Admin Login</a>
+                    <a class="btn btn-outline-light" href="/clanstats" role="button">Clan Stats</a>
+                    {% endif %}
+                    {% if homeie %}
+                    <a class="btn btn-outline-light" href="/" role="button">Home</a>
+                    <a class="btn btn-outline-light" href="/clanstats" role="button">Clan Stats</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <canvas id="test"></canvas>
+    {% block content %}
+
+    {% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminLoginModalLabel">Admin Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminLoginForm" action="/adminlogin" method="post">
+                        <div class="mb-3">
+                            <label for="adminPassword" class="form-label">Password</label>
+                            <input type="password" name="adminpass" class="form-control" id="adminPassword" required>
+                        </div>
+                        <button type="submit" color="#751212">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
