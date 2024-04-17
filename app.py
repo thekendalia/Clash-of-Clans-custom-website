@@ -34,6 +34,7 @@ user = {}
 
 @app.get('/')
 def index():
+    member_names.clear()
     sum = 0
     response = requests.get(url1, headers=headers)  # Use requests.get for clarity
     if response.status_code == 200:
