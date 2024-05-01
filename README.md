@@ -7,7 +7,7 @@ Make a custom website for your clash of clans clan
  - Database to keep track of members when they opt-in/opt-out
  - Uses Clash of Clans API to track and display clan data like clan member count, warlog... etc
 
-![Home Page](https://cdn.discordapp.com/attachments/862445732534550529/1229631965246783541/github-MadewithClipchamp-ezgif.com-video-to-gif-converter.gif?ex=66306301&is=661dee01&hm=4659ba762531720724ac5db7c8849058910aae966cf341e6cf0fe61249b811c5&)
+![Home Page](https://media.discordapp.net/attachments/862445732534550529/1229631965246783541/github-MadewithClipchamp-ezgif.com-video-to-gif-converter.gif?ex=66325d41&is=66310bc1&hm=1c879b0ca6561ea8f5fb969636a19cb720078e271947f4767f1e8f3232bde326&=&width=1000&height=437)
 
 ## Installation
 
