@@ -1,5 +1,6 @@
 import time
 import os
+from twilio.rest import Client
 from dotenv import load_dotenv
 import requests
 from flask import render_template, Flask, request, flash, url_for, redirect, jsonify, session
@@ -23,6 +24,7 @@ clan_tag = os.getenv("clantag")
 url1 = f'https://api.clashofclans.com/v1/clans/{clan_tag}/members'
 url2 = f'https://api.clashofclans.com/v1/clans/{clan_tag}/warlog'
 url3 = f'https://api.clashofclans.com/v1/clans/{clan_tag}'
+url4 = f'https://api.clashofclans.com/v1/clans/{clan_tag}/currentwar'
 
 member_names = []
 
@@ -30,6 +32,20 @@ my_dict = []
 choice = []
 isname = []
 user = {}
+
+
+sid = os.getenv("account_sid")
+twilio_token = os.getenv("auth_token_twilio")
+
+client = Client(sid, twilio_token)
+
+message = client.messages.create(
+    body="THIS IS A TEST MESSAGE",
+    from_=os.getenv("phone_number"),
+    to=os.getenv("my_number")
+    
+)
+print(message.body)
 
 
 @app.get('/')
@@ -104,11 +120,64 @@ def auth():
         return redirect(url_for('index', submitted=True, message="Security Failed: incorrect TH"))
     
     
+@app.get('/currentwar')
+def current_war():
+    response4 = requests.get(url4, headers=headers)
+    clanwar = response4.json()
+    zero, one, two, three = 0, 0, 0, 0
+    oppzero, oppone, opptwo, oppthree = 0, 0, 0, 0
+    for member in clanwar['clan']['members']:
+        if 'attacks' in member:
+            for attack in member['attacks']:
+                stars = attack['stars']
+                if stars == 0:
+                    zero += 1
+                elif stars == 1:
+                    one += 1
+                elif stars == 2:
+                    two += 1
+                elif stars == 3:
+                    three += 1
+    for member in clanwar['opponent']['members']:
+        if 'attacks' in member:
+            for attack in member['attacks']:
+                stars = attack['stars']
+                if stars == 0:
+                    oppzero += 1
+                elif stars == 1:
+                    oppone += 1
+                elif stars == 2:
+                    opptwo += 1
+                elif stars == 3:
+                    oppthree += 1
+    members_info = []  # This will store our dictionaries
+
+    for member in clanwar['clan']['members']:
+        attacks_left = 2  # Initialize with maximum attacks
+        if 'attacks' in member:
+            attacks_left -= len(member['attacks'])  # Subtract the number of attacks made
+
+        # Create a dictionary for each member with relevant information
+        new_dict = {
+            'name': member['name'],
+            'position': member.get('mapPosition', float('inf')),  # Use float('inf') to handle missing positions
+            'attacks_left': attacks_left
+        }
+        members_info.append(new_dict)
+
+    # Sort members by mapPosition
+    members_info = sorted(members_info, key=lambda x: x['position'])
+        
+    return render_template('current_war.html', clan=clanwar, three=three, two=two, one=one, zero=zero, oppzero=oppzero, oppone=oppone, opptwo=opptwo, oppthree=oppthree, clanmem=clanwar['clan'], members_info=members_info)
 
 @app.get('/security_check')
 def security_check():
     name = session['name']
     return render_template('auth.html', name=name)
+
+@app.get('/addhome')
+def addhome():
+    return render_template('/addhome.html')
 
 @app.post('/adduser')
 def adduser():
