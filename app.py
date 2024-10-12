@@ -317,7 +317,7 @@ def email():
     check = clashuser.existingemail(email_lower)
     if check:
         session['email'] = email
-        rand = clashuser.update_user_code(random_number, email_lower)
+        clashuser.update_user_code(random_number, email_lower)
         send(random_number,email)
         return redirect(url_for('code'))
     else:
@@ -337,7 +337,7 @@ def code_check():
     if int(code) == int(check):
         return redirect(url_for('newpassword'))
     else:
-        return redirect(url_for('home', submitted=True, message="Code incorrect" ))
+        return redirect(url_for('home', submitted=True, message="Code incorrect"))
 
 @app.route('/newpassword')
 def newpassword():
