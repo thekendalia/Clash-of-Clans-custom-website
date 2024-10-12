@@ -22,23 +22,15 @@
         }, 5000);
     </script>
 {% endif %}
-        <h3>Register for War</h3>
-	<h6>Watching {{ nummems }} members</h6>
+        <h3>Reset Password</h3>
     </div>
-    <form id="infoForm" method="post" action="/adduser">
+    <form id="infoForm" method="post" action="/email">
         <div class="form-group">
-            <label style="color: white;" for="name">Clash Name: </label>
-            <input type="text" id="name" placeholder="ex. itsClasher" name="name" required autocomplete="off">
-            <div style="color: white" id="nameSuggestions" class="suggestions-container"></div>
+            <label style="color: white;" for="username">Email</label>
+            <input type="text" id="username" placeholder="Email" name="email" required autocomplete="off">
+
         </div>
-        <div class="form-group">
-            <select class="form-select" name="opt_choice" aria-label="Default select example" required>
-                <option value="" disabled selected hidden>Open to Opt-In or Out</option>
-                <option value="1">CWL Opt-In</option>
-                <option value="2">CWL Opt-Out</option>
-            </select>
-        </div>
-        <button type="submit">Submit</button>
+        <button type="submit">Reset</button>
     </form>
 </div>
 
@@ -212,3 +204,26 @@ button {
 
 </style>
 {% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminLoginModalLabel">Admin Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminLoginForm" action="/adminlogin" method="post">
+                        <div class="mb-3">
+                            <label for="adminPassword" class="form-label">Password</label>
+                            <input type="password" name="adminpass" class="form-control" id="adminPassword" required>
+                        </div>
+                        <button type="submit" color="#751212">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

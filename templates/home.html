@@ -22,24 +22,24 @@
         }, 5000);
     </script>
 {% endif %}
-        <h3>Register for War</h3>
-	<h6>Watching {{ nummems }} members</h6>
+    {% if username is not none %}  
+    <h1>Welcome, <b style="color:#751212">{{username}}</b></h1>
+    <h6>Watching {{ nummems }} members</h6>
+    <br>
+    <a class="btn btn-outline-light" href="/cwl" role="button">War Signup</a>  
+    <a class="btn btn-outline-light" href="/clanstats" role="button">Clan Stats</a>  
+    <a class="btn btn-outline-light" href="/currentwar" role="button">War</a>  
+    <a class="btn btn-outline-light" href="/disabled" role="button">Account</a>
+    <a class="btn btn-outline-light" href="/logout" role="button">Sign Out</a>  
+    {% else %}
+    <h6>Welcome to</h6>
+	<h1 style="color:#751212">Dark Rose</h1>
+    <h6>Watching {{ nummems }} members</h6>
+    <!--<a class="btn btn-outline-light" href="/" role="button">Apply to Join</a>--> 
+    <a class="btn btn-outline-light" href="/clanstats" role="button">Clan Stats</a> 
+    <a class="btn btn-outline-light" href="/login" role="button">Log in</a>  
+    {% endif %}
     </div>
-    <form id="infoForm" method="post" action="/adduser">
-        <div class="form-group">
-            <label style="color: white;" for="name">Clash Name: </label>
-            <input type="text" id="name" placeholder="ex. itsClasher" name="name" required autocomplete="off">
-            <div style="color: white" id="nameSuggestions" class="suggestions-container"></div>
-        </div>
-        <div class="form-group">
-            <select class="form-select" name="opt_choice" aria-label="Default select example" required>
-                <option value="" disabled selected hidden>Open to Opt-In or Out</option>
-                <option value="1">CWL Opt-In</option>
-                <option value="2">CWL Opt-Out</option>
-            </select>
-        </div>
-        <button type="submit">Submit</button>
-    </form>
 </div>
 
 

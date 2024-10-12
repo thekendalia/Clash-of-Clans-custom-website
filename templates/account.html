@@ -1,51 +1,71 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="form-overlay mobile-padding">
-	<div class="center-text">
-        {% if message %}
-    <p id="fadeMessage" style="color:#751212">{{ message }}</p>
-    <script>
-        setTimeout(function() {
-            var fadeTarget = document.getElementById("fadeMessage");
-            var fadeEffect = setInterval(function () {
-                if (!fadeTarget.style.opacity) {
-                    fadeTarget.style.opacity = 1;
-                }
-                if (fadeTarget.style.opacity > 0) {
-                    fadeTarget.style.opacity -= 0.1;
-                } else {
-                    clearInterval(fadeEffect);
-                    fadeTarget.style.display = 'none';
-                }
-            }, 200);
-        }, 5000);
-    </script>
-{% endif %}
-        <h3>Register for War</h3>
-	<h6>Watching {{ nummems }} members</h6>
-    </div>
-    <form id="infoForm" method="post" action="/adduser">
-        <div class="form-group">
-            <label style="color: white;" for="name">Clash Name: </label>
-            <input type="text" id="name" placeholder="ex. itsClasher" name="name" required autocomplete="off">
-            <div style="color: white" id="nameSuggestions" class="suggestions-container"></div>
-        </div>
-        <div class="form-group">
-            <select class="form-select" name="opt_choice" aria-label="Default select example" required>
-                <option value="" disabled selected hidden>Open to Opt-In or Out</option>
-                <option value="1">CWL Opt-In</option>
-                <option value="2">CWL Opt-Out</option>
-            </select>
-        </div>
-        <button type="submit">Submit</button>
-    </form>
-</div>
-
-
-
-
-
+    <link rel="stylesheet" href="styles.css">  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            line-height: 1.6;  
+            margin: 0;  
+            padding: 20px;  
+            background-color: #000000;  
+        }  
+        .container {  
+            max-width: 600px;  
+            margin: auto;  
+            background: rgb(140, 140, 140); 
+            padding: 20px;  
+            border-radius: 8px;  
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
+        }  
+        h1 {  
+            text-align: center;  
+            color: #333;  
+        }  
+        .account-info {  
+            margin-bottom: 20px;  
+        }  
+        .account-info label {  
+            font-weight: bold;  
+        }  
+        .random-info {  
+            background-color: rgb(140, 140, 140);  
+            padding: 10px;  
+            border-radius: 5px;  
+            margin-top: 10px;  
+        }  
+        footer {  
+            text-align: center;  
+            margin-top: 20px;  
+            font-size: 0.9em;  
+            color: #777;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="container">  
+        <br>
+        <br>
+        <br>
+        <h1>Account Page</h1>  
+        <div class="account-info">  
+            <label for="account-name">Username:</label>  
+            <p id="account-name">John Doe</p>  
+            <label for="account-name">Email:</label>  
+            <p id="account-name">John Doe</p>  
+        </div>  
+        
+        <div class="random-info">  
+            <h2>Random Information</h2>  
+            <ul>  
+                <li><strong>Email:</strong> john.doe@example.com</li>  
+                <li><strong>Phone Number:</strong> (123) 456-7890</li>  
+                <li><strong>Join Date:</strong> January 1, 2020</li>  
+                <li><strong>Location:</strong> New York, USA</li>  
+            </ul>  
+        </div>  
+    </div>  
+</body>  
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const nameInput = document.getElementById("name");

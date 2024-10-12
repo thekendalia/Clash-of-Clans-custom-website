@@ -5,3 +5,10 @@ CREATE TABLE IF NOT EXISTS clash (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL,
+    username VARCHAR(255) NOT NULL,
+    clash_name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);

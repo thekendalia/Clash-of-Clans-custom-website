@@ -30,6 +30,7 @@
                 flex-direction: column;
                 align-items: start;
             }
+
             img {
                 justify-content: center;
                 align-items: center;
@@ -49,6 +50,7 @@
         .custom-navbar-color {
             background-color: black;
         }
+
         .custom-footer-color {
             background-color: black;
         }
@@ -151,12 +153,14 @@
             text-align: center;
             z-index: 1002;
         }
+
         .footer {
             z-index: 1005;
             position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 60px; /* Set the height of your footer */
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            /* Set the height of your footer */
         }
 
         .flex-container {
@@ -192,6 +196,10 @@
             margin-right: 5px;
         }
 
+        .btn-login {
+            display: inline-block;
+        }
+
         #table-wrapper {
             position: relative;
         }
@@ -201,15 +209,18 @@
             overflow: auto;
             margin-top: 20px;
         }
+
         #table-scroller {
             height: 200px;
             overflow: auto;
             margin-top: 20px;
         }
+
         hr.solid {
             border-top: 3px solid white;
             background-color: white;
         }
+
         .button-size {
             width: 545px;
             height: 60px;
@@ -219,13 +230,20 @@
             background-color: transparent;
         }
 
-        #table-wrapper table thead th .text {
+        #table-wrapper table thead th .text .password {
             position: fixed;
             top: -20px;
             z-index: 2;
             height: 20px;
             width: 20%;
             border: 1px solid red;
+        }
+        .password-container {
+            display: flex;
+            gap: 10px;
+        }
+        .password-container input {
+            flex: 1;
         }
 
         .opponent-column {
@@ -254,20 +272,20 @@
                     <a class="navbar-brand" style="color: white;" aria-current="page">Dark Rose CWL Signup</a>
                 </div>
                 <!-- Admin Login button for mobile view, centered -->
+                {% if not no_header %}
+                <div class="d-lg-none text-center my-2">
+                </div>
+                {% endif %}
                 {% if not no_search_bar %}
                 <div class="d-lg-none text-center my-2">
                     <a class="btn btn-outline-light" href="/" role="button">Home</a>
-                    <a class="btn btn-outline-light" href="#" role="button" data-bs-toggle="modal"
-                        data-bs-target="#adminLoginModal">Admin Login</a>
-                    <a class="btn btn-outline-light" href="/clanstats" role="button">Clan Stats</a>
-                    <a class="btn btn-outline-light" href="/currentwar" role="button">WAR</a>
+                    <!--<a class="btn btn-outline-light" href="#" role="button" data-bs-toggle="modal"
+                        data-bs-target="#adminLoginModal">Admin Login</a> -->
                 </div>
                 {% endif %}
                 {%if homeie %}
                 <div class="d-lg-none text-center my-2">
                     <a class="btn btn-outline-light" href="/" role="button">Home</a>
-                    <a class="btn btn-outline-light" href="/clanstats" role="button">Clan Stats</a>
-                    <a class="btn btn-outline-light" href="/currentwar" role="button">WAR</a>
                 </div>
                 {% endif %}
                 <!-- Additional navbar content for larger screens -->
@@ -276,17 +294,17 @@
                 </ul>
                 <!-- Desktop Buttons, aligned to the right -->
                 <div class="ms-auto d-none d-lg-block">
+                    {% if not no_header %}
+                    <div class="d-lg-none text-center my-2">
+                    </div>
+                    {% endif %}
                     {% if not no_search_bar %}
                     <a class="btn btn-outline-light" href="/" role="button">Home</a>
-                    <a class="btn btn-outline-light" href="#" role="button" data-bs-toggle="modal"
-                        data-bs-target="#adminLoginModal">Admin Login</a>
-                    <a class="btn btn-outline-light" href="/clanstats" role="button">Clan Stats</a>
-                    <a class="btn btn-outline-light" href="/currentwar" role="button">WAR</a>
+                    <!--<a class="btn btn-outline-light" href="#" role="button" data-bs-toggle="modal"
+                        data-bs-target="#adminLoginModal">Admin Login</a>-->
                     {% endif %}
                     {% if homeie %}
                     <a class="btn btn-outline-light" href="/" role="button">Home</a>
-                    <a class="btn btn-outline-light" href="/clanstats" role="button">Clan Stats</a>
-                    <a class="btn btn-outline-light" href="/currentwar" role="button">WAR</a>
                     {% endif %}
                 </div>
             </div>
