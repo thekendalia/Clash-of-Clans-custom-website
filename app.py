@@ -254,11 +254,15 @@ def create_acc():
     password = request.form['password']  
     confirmpass = request.form['confirm-password'] 
     user = username.lower()
+    lower_email = email.lower()
     if password != confirmpass:  
         return redirect(url_for('create', submitted=True, message="Mismatched Password")) 
     exists = clashuser.existingaccount(user)  
+    email_exists = clashuser.existingemail(lower_email)
     if exists:  
         return redirect(url_for('create', submitted=True, message="Username taken"))
+    if email_exists:
+        return redirect(url_for('create', submitted=True, message="An account with that email already exists!"))
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8') 
     clashuser.new_account(username, email, hashed_password)  
     

@@ -53,8 +53,8 @@ def new_account(uname: str, cname: str, password: str):
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor() as cursor:
-            insert_query = """INSERT INTO users (username, email, password)
-                              VALUES (%s, %s, %s);"""
+            insert_query = """INSERT INTO users (username, email, password, code)
+                              VALUES (%s, %s, %s, 7685);"""
             cursor.execute(insert_query, (uname, cname, password))
             conn.commit()
             
@@ -87,6 +87,21 @@ def existingaccount(name: str) -> bool:
                     SELECT 1
                     FROM users
                     WHERE LOWER(username) = %s
+                )""",
+                (name,)
+            )
+            exists = cursor.fetchone()[0]
+            return exists
+        
+def existingemail(name: str) -> bool:
+    pool = get_pool()
+    with pool.connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                """SELECT EXISTS(
+                    SELECT 1
+                    FROM users
+                    WHERE LOWER(email) = %s
                 )""",
                 (name,)
             )
