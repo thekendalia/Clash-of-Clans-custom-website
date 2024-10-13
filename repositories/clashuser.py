@@ -58,7 +58,6 @@ def new_account(uname: str, cname: str, password: str):
             cursor.execute(insert_query, (uname, cname, password))
             conn.commit()
             
-import bcrypt  
 
 def login_user(username: str, userpass: str):   
     pool = get_pool()  
@@ -159,11 +158,7 @@ def check_code(email: str):
                 (email,)  
             )  
             result = cursor.fetchone()
-            
-            if result is not None:  
-                return result[0]
-            else:  
-                return None
+            return result
             
 def update_password(password: str, email: str):  
     pool = get_pool() 
