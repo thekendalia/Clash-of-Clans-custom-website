@@ -158,7 +158,7 @@ def check_code(email: str):
                 (email,)  
             )  
             result = cursor.fetchone()
-            return result
+            return result[0]
             
 def update_password(password: str, email: str):  
     pool = get_pool() 
