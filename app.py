@@ -316,7 +316,7 @@ def email():
     email_lower = email.lower()
     check = clashuser.existingemail(email_lower)
     if check:
-        session['email'] = email
+        session['verify'] = email_lower
         clashuser.update_user_code(random_number, email_lower)
         send(random_number,email)
         return redirect(url_for('code'))
@@ -330,8 +330,9 @@ def code():
 @app.post('/code_check')
 def code_check():
     code = request.form['code']
-    email = dict(session).get('email', None)
+    email = dict(session).get('verify', None)
     check = clashuser.check_code(email)
+    print(email)
     print(code)
     print(check)
     if int(code) == int(check):
