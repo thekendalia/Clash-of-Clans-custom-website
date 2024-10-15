@@ -87,18 +87,18 @@
     <div style="padding-bottom:70%" id="countdown" class="countdown-container"
         style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
         <h2 style="color:white; text-align: center;">War starts in..</h2>
-        <h3 id="countdown-timer" style="text-align: center;"></h3>
+        <h3 id="countdown-timer" style="text-align: center; color:white"></h3>
         <h2 style="color:white; text-align: center; font-size:15px">Check back once the timer is over!</h2>
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
             <div style="border: 1px solid black; display: flex; flex-direction: column;">
                 <img src="{{ clan.clan.badgeUrls.medium }}" alt="Clan Badge" style="width:128px; height:128px;">
-                <h2 style="text-align: center;">{{ clan.clan.name }}</h2>
+                <h2 style="text-align: center; color:white">{{ clan.clan.name }}</h2>
             </div>
-            <h3>vs.</h3>
+            <h3 style="color:white">vs.</h3>
             <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <img src="{{ clan.opponent.badgeUrls.medium }}" alt="Opponent Clan Badge"
                     style="width:128px; height:128px;">
-                <h2 style="text-align: center;">{{ clan.opponent.name }}</h2>
+                <h2 style="text-align: center; color:white">{{ clan.opponent.name }}</h2>
             </div>
         </div>
     </div>

@@ -213,22 +213,20 @@ def current_war():
                         opptwo += 1
                     elif stars == 3:
                         oppthree += 1
-        members_info = []  # This will store our dictionaries
+        members_info = []
 
         for member in clanwar['clan']['members']:
-            attacks_left = 2  # Initialize with maximum attacks
+            attacks_left = 2 
             if 'attacks' in member:
-                attacks_left -= len(member['attacks'])  # Subtract the number of attacks made
+                attacks_left -= len(member['attacks']) 
 
-            # Create a dictionary for each member with relevant information
             new_dict = {
                 'name': member['name'],
-                'position': member.get('mapPosition', float('inf')),  # Use float('inf') to handle missing positions
+                'position': member.get('mapPosition', float('inf')), 
                 'attacks_left': attacks_left
             }
             members_info.append(new_dict)
 
-        # Sort members by mapPosition
         members_info = sorted(members_info, key=lambda x: x['position'])
         
         return render_template('current_war.html', clan=clanwar, three=three, two=two, one=one, zero=zero, oppzero=oppzero, oppone=oppone, opptwo=opptwo, oppthree=oppthree, clanmem=clanwar['clan'], members_info=members_info)
@@ -336,7 +334,6 @@ def code_check():
     code = request.form['code']
     email = dict(session).get('verify', None)
     check = clashuser.check_code(email)
-    print(email)
     print(code)
     print(check)
     if int(code) == int(check):
