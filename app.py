@@ -139,7 +139,11 @@ def get_members():
 
 @app.get('/account')
 def account():
-    return render_template('account.html')
+    email = dict(session).get('email', None)
+    if email == None:
+        return redirect(url_for('home'))
+    istrue, id, username, cemail =  clashuser.user_data(email)
+    return render_template('account.html', username=username, email=cemail)
 
 @app.get('/admin')
 def admin():
@@ -351,7 +355,7 @@ def update_password():
     message = request.args.get('message', '')
     if password == cpassword:
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-        email = dict(session).get('email', None)
+        email = dict(session).get('verify', None)
         clashuser.update_password(hashed_password, email)
         return redirect(url_for('home', submitted=True, message="Password has been updated!" ))
     return redirect(url_for('home', submitted=True, message="Password doesn't match" ))

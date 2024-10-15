@@ -76,6 +76,21 @@ def login_user(username: str, userpass: str):
                 
             # If the user doesn't exist or password is incorrect  
             return False, None, None, 'Invalid username or password'
+        
+def user_data(email: str):   
+    pool = get_pool()  
+    with pool.connection() as conn:  
+        with conn.cursor() as cur:   
+            cur.execute('SELECT id, username, email FROM users WHERE email = %s', (email,))  
+            user_record = cur.fetchone()  
+            
+            if user_record:  
+                user_id, db_username, clash_name = user_record  
+                
+                return True, user_id, db_username, clash_name  
+                
+            # If the user doesn't exist or password is incorrect  
+            return False, None, None, 'Invalid username or password'
             
 def existingaccount(name: str) -> bool:
     pool = get_pool()
