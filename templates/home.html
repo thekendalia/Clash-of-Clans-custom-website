@@ -22,7 +22,15 @@
         }, 5000);
     </script>
 {% endif %}
-    {% if username is not none %}  
+    {% if username == 'admin' %}  
+    <h1>Welcome, <b style="color:#751212">{{username}}</b></h1>
+    <h6>Watching {{ nummems }} members</h6>
+    <br>
+    <a class="btn btn-light" href="/admin" role="button">Signup History</a>  
+    <a class="btn btn-light" href="/clanstats" role="button">Clan Stats</a>  
+    <a class="btn btn-light" href="/currentwar" role="button">War</a>  
+    <a class="btn btn-light" href="/logout" role="button">Sign Out</a>  
+    {% elif username is not none %}  
     <h1>Welcome, <b style="color:#751212">{{username}}</b></h1>
     <h6>Watching {{ nummems }} members</h6>
     <br>
@@ -30,14 +38,14 @@
     <a class="btn btn-outline-light" href="/clanstats" role="button">Clan Stats</a>  
     <a class="btn btn-outline-light" href="/currentwar" role="button">War</a>  
     <a class="btn btn-outline-light" href="/disabled" role="button">Account</a>
-    <a class="btn btn-outline-light" href="/logout" role="button">Sign Out</a>  
+    <a class="btn btn-outline-light" href="/logout" role="button">Sign Out</a> 
     {% else %}
-    <h6>Welcome to</h6>
-	<h1 style="color:#751212">Dark Rose</h1>
-    <h6>Watching {{ nummems }} members</h6>
+    <h6 style="font-size:35px">Welcome to</h6>
+	<h1 style="color:#751212; font-size:75px">Dark Rose</h1>
+    <h6 style="font-size:20px">Watching {{ nummems }} members</h6>
     <!--<a class="btn btn-outline-light" href="/" role="button">Apply to Join</a>--> 
-    <a class="btn btn-outline-light" href="/clanstats" role="button">Clan Stats</a> 
-    <a class="btn btn-outline-light" href="/login" role="button">Log in</a>  
+    <a type="button" class="btn btn-light" href="/clanstats" role="button">Clan Stats</a> 
+    <a type="button" class="btn btn-light" href="/login" role="button">Log in</a>  
     {% endif %}
     </div>
 </div>

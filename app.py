@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 import requests
 import bcrypt
-from flask import render_template, Flask, request, flash, url_for, redirect, jsonify, session
+from flask import render_template, Flask, request, flash, url_for, redirect, jsonify, session, json
 import random
 
 from repositories import clashuser
@@ -86,10 +86,37 @@ def create():
     message = request.args.get('message', '')
     return render_template('create.html', message=message)
 
-@app.route('/forgot_password')
+@app.route('/forgot_password', methods=["GET", "POST"])
 def forgot_password():
-    return render_template('reset.html')
+    sitekey = "6LdO-XwqAAAAAAWTnkO7GBmuDIrO5zT6DzAmj6dy"
+    message = request.args.get('message', '')
+    
+    if request.method == "POST":
+        random_number = random.randint(1000, 9999) 
+        email = request.form['email']
+        captcha_response = request.form['g-recaptcha-response']
+        email_lower = email.lower()
+        check = clashuser.existingemail(email_lower)
+        print(check)
+        if check and is_human(captcha_response):
+            session['verify'] = email_lower
+            clashuser.update_user_code(random_number, email_lower)
+            send(random_number,email)
+            return redirect(url_for('code', sitekey=sitekey))
+        elif is_human(captcha_response) == False:
+            return redirect(url_for('forgot_password', submitted=True, message="You forgot Captcha!"))
+        else:
+            return redirect(url_for('forgot_password', submitted=True, message="Email not registered"))
+    return render_template('reset.html', sitekey=sitekey, message=message)
 
+def is_human(captcha_response):
+    
+    secret = "6LdO-XwqAAAAALi_SjY45V8_AC7FQ-441ADJPPrV"
+    payload = {'response':captcha_response, 'secret':secret}
+    response = requests.post("https://www.google.com/recaptcha/api/siteverify", payload)
+    response_text = json.loads(response.text)
+    return response_text['success']
+    
 @app.get('/login')
 def login():
     message = request.args.get('message', '')
@@ -147,12 +174,14 @@ def account():
 
 @app.get('/admin')
 def admin():
-    if len(my_dict) == 0:
-        return redirect(url_for('index'))
-    else:
+    username = dict(session).get('username', None)
+    print("User " + username)
+    if username == "admin":
         roseusers = clashuser.get_clash_users()
         
         return render_template('admin.html', rose=roseusers, no_search_bar=True, homeie=True)
+    else:
+        return redirect(url_for('index'))
     
 @app.get('/auth')
 def auth():
@@ -315,6 +344,12 @@ def logout():
 def email():
     random_number = random.randint(1000, 9999) 
     email = request.form['email']
+    captcha_response = request.form['g-recaptcha-response']
+    if is_human(captcha_response):
+        message = "Captcha Passed!"
+    else:
+        message = "Captcha Failed!"
+    flash(message)
     email_lower = email.lower()
     check = clashuser.existingemail(email_lower)
     if check:

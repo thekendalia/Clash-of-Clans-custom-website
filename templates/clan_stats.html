@@ -48,8 +48,6 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th style="color:white" scope="col">{{ clandata.name }}</th>
-                        <th style="color:white" scope="col">vs</th>
                         <th class="opponent-column" style="color:white" scope="col">Opponent</th>
                         <th style="color:white" scope="col">W/L</th>
                     </tr>
@@ -57,8 +55,6 @@
                 <tbody class="scrollable-tbody">
                     {% for war in wars if war.attacksPerMember != 1 %}
                     <tr>
-                        <td style="color:white">{{ war.clan.name }}</td>
-                        <td style="color:white">vs</td>
                         <td style="color:white">{{ war.opponent.name }}</td>
                         <td style="color:white">{{ 'Win' if war.result == 'win' else 'Tie' if war.result == 'tie' else 'Lose' }}</td>
                     </tr>
