@@ -84,11 +84,12 @@ def home():
 @app.get('/create')
 def create():
     message = request.args.get('message', '')
-    return render_template('create.html', message=message)
+    sitekey = "6LdO-XwqAAAAAAWTnkO7GBmuDIrO5zT6DzAmj6dy"
+    return render_template('create.html', message=message, sitekey=sitekey)
 
 @app.route('/forgot_password', methods=["GET", "POST"])
 def forgot_password():
-    sitekey = os.getenv("sitekey")
+    sitekey = "6LdO-XwqAAAAAAWTnkO7GBmuDIrO5zT6DzAmj6dy"
     message = request.args.get('message', '')
     
     if request.method == "POST":
@@ -111,7 +112,7 @@ def forgot_password():
 
 def is_human(captcha_response):
     
-    secret = os.getenv("secret")
+    secret = "6LdO-XwqAAAAALi_SjY45V8_AC7FQ-441ADJPPrV"
     payload = {'response':captcha_response, 'secret':secret}
     response = requests.post("https://www.google.com/recaptcha/api/siteverify", payload)
     response_text = json.loads(response.text)
@@ -278,12 +279,13 @@ def adduser():
 from flask import request, redirect, url_for, render_template  
 import bcrypt  
 
-@app.post('/create')  
-def create_acc():  
+@app.post('/createacc')  
+def create_acc(): 
     username = request.form['username']  
     email = request.form['email']  
     password = request.form['password']  
-    confirmpass = request.form['confirm-password'] 
+    confirmpass = request.form['confirm-password']
+    captcha_response = request.form['g-recaptcha-response']
     user = username.lower()
     lower_email = email.lower()
     if password != confirmpass:  
@@ -294,8 +296,10 @@ def create_acc():
         return redirect(url_for('create', submitted=True, message="Username taken"))
     if email_exists:
         return redirect(url_for('create', submitted=True, message="An account with that email already exists!"))
+    if is_human(captcha_response) == False:
+        return redirect(url_for('create', submitted=True, message="Captcha Failed!"))
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8') 
-    clashuser.new_account(username, email, hashed_password)  
+    clashuser.new_account(username, email, hashed_password)
     
     return redirect(url_for('login'))
 

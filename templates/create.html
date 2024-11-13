@@ -1,10 +1,11 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<script src="https://www.google.com/recaptcha/api.js"></script>
 <div class="form-overlay mobile-padding">
 	<div class="center-text">
         {% if message %}
-    <p id="fadeMessage" style="color:#751212">{{ message }}</p>
+    <p id="fadeMessage" style="color:#ffffff">{{ message }}</p>
     <script>
         setTimeout(function() {
             var fadeTarget = document.getElementById("fadeMessage");
@@ -24,7 +25,7 @@
 {% endif %}
         <h3>Create an account</h3>
     </div>
-    <form id="infoForm" method="post" action="/create">
+    <form id="infoForm" method="post" action="/createacc">
         <div class="form-group">
             <label style="color: white;" for="username">Email</label>
             <input type="text" id="username" placeholder="Email" name="email" required autocomplete="off">
@@ -35,6 +36,7 @@
                 <input type="password" id="password" name="password" placeholder="Password" required autocomplete="off">
                 <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required autocomplete="off">
             </div>
+            <div class="g-recaptcha" data-sitekey="{{ sitekey }}"></div>
         </div>
         <button type="submit">Create Account</button>
     </form>
