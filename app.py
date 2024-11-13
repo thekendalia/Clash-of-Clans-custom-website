@@ -88,7 +88,7 @@ def create():
 
 @app.route('/forgot_password', methods=["GET", "POST"])
 def forgot_password():
-    sitekey = "6LdO-XwqAAAAAAWTnkO7GBmuDIrO5zT6DzAmj6dy"
+    sitekey = os.getenv("sitekey")
     message = request.args.get('message', '')
     
     if request.method == "POST":
@@ -111,7 +111,7 @@ def forgot_password():
 
 def is_human(captcha_response):
     
-    secret = "6LdO-XwqAAAAALi_SjY45V8_AC7FQ-441ADJPPrV"
+    secret = os.getenv("secret")
     payload = {'response':captcha_response, 'secret':secret}
     response = requests.post("https://www.google.com/recaptcha/api/siteverify", payload)
     response_text = json.loads(response.text)
