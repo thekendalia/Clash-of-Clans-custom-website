@@ -33,17 +33,17 @@
             <input type="text" id="username" placeholder="Username" name="username" required autocomplete="off">
             <label style="color: white;">Password</label>
             <div class="password-container">
-                <input type="password" id="password" name="password" placeholder="Password" required autocomplete="off">
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required autocomplete="off">
+                <input type="password" class="passwidth" id="password" name="password" placeholder="Password" required autocomplete="off">
+                <input type="password" class="passwidth" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required autocomplete="off">
             </div>
-            <div class="g-recaptcha" data-sitekey="{{ sitekey }}"></div>
+            <div style="display: flex; justify-content: center; align-items: center; margin-top:10px; margin-bottom:10px;" class="g-recaptcha" data-sitekey="{{ sitekey }}"></div>
         </div>
         <button type="submit">Create Account</button>
     </form>
     <div class="center-text">
         <br>
     <h5 style="color:white; justify-content:center">Already have an account?</h5>
-    <a class="btn btn-outline-light" href="/login" role="button">Log in</a>
+    <a class="buttonred" href="/login" role="button">Log in</a>
     </div>
 </div>
 
@@ -154,16 +154,17 @@
     transform: translate(-50%, -50%);
     z-index: 10;
     background-color: black;
-    padding: 20px;
+    padding: 0px;
+    margin-top: 93px;
     border-radius: 10px;
     width: 40%;
     max-width: 600px;
 }
+.passwidth {
+    height: 50px;
+}
 
 /* Additional styling for form elements */
-.form-group {
-    margin-bottom: 20px;
-}
 
 label {
     display: block;
@@ -172,6 +173,7 @@ label {
 
 input[type="text"],
 input[type="email"],
+input[type="password"],
 .form-select {
     width: 100%;
     padding: 10px;
@@ -185,6 +187,7 @@ button {
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        font-family: "Lalezar", system-ui;
     }
 
     button:hover {

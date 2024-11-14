@@ -4,7 +4,7 @@
 <div class="form-overlay mobile-padding">
 	<div class="center-text">
         {% if message %}
-    <p id="fadeMessage" style="color:#751212">{{ message }}</p>
+    <p id="fadeMessage" style="color:#ebd2d2">{{ message }}</p>
     <script>
         setTimeout(function() {
             var fadeTarget = document.getElementById("fadeMessage");
@@ -23,29 +23,35 @@
     </script>
 {% endif %}
     {% if username == 'admin' %}  
-    <h1>Welcome, <b style="color:#ffffff">{{username}}</b></h1>
+    <h1>Welcome, <b style="color:#751212">{{username}}!</b></h1>
     <h6>Watching {{ nummems }} members</h6>
     <br>
-    <a class="btn btn-light" href="/admin" role="button">Signup History</a>  
-    <a class="btn btn-light" href="/clanstats" role="button">Clan Stats</a>  
-    <a class="btn btn-light" href="/currentwar" role="button">War</a>  
-    <a class="btn btn-light" href="/logout" role="button">Sign Out</a>  
+    <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+        <a class="buttonred" href="/admin" role="button">Signup History</a>  
+        <a class="buttonred" href="/clanstats" role="button">Clan Stats</a>  
+        <a class="buttonred" href="/currentwar" role="button">War</a> 
+    </div>
+    <a class="buttonred" href="/logout" role="button">Sign Out</a>  
     {% elif username is not none %}  
     <h1>Welcome, <b style="color:#751212">{{username}}</b></h1>
     <h6>Watching {{ nummems }} members</h6>
     <br>
-    <a class="btn btn-outline-light" href="/cwl" role="button">War Signup</a>  
-    <a class="btn btn-outline-light" href="/clanstats" role="button">Clan Stats</a>  
-    <a class="btn btn-outline-light" href="/currentwar" role="button">War</a>  
-    <a class="btn btn-outline-light" href="/disabled" role="button">Account</a>
-    <a class="btn btn-outline-light" href="/logout" role="button">Sign Out</a> 
+    <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+        <a class="buttonred" href="/cwl" role="button">War Signup</a>  
+        <a class="buttonred" href="/clanstats" role="button">Clan Stats</a>  
+        <a class="buttonred" href="/currentwar" role="button">War</a> 
+    </div>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+        <a class="buttonred" href="/disabled" role="button">Account</a>
+        <a class="buttonred" href="/logout" role="button">Sign Out</a> 
+    </div>
     {% else %}
     <h6 style="font-size:35px">Welcome to</h6>
 	<h1 style="color:#751212; font-size:75px">Dark Rose</h1>
     <h6 style="font-size:20px">Watching {{ nummems }} members</h6>
     <!--<a class="btn btn-outline-light" href="/" role="button">Apply to Join</a>--> 
-    <a type="button" class="btn btn-light" href="/clanstats" role="button">Clan Stats</a> 
-    <a type="button" class="btn btn-light" href="/login" role="button">Log in</a>  
+    <a type="button" class="buttonred" href="/clanstats" role="button">Clan Stats</a> 
+    <a type="button" class="buttonred" href="/login" role="button">Log in</a>  
     {% endif %}
     </div>
 </div>

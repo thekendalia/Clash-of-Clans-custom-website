@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Dark Rose CWL</title>
+    <title>Dark Rose</title>
     <link rel="icon" href="static/images/DarkRose.gif" type="image/gif"> <!-- add your image here for navbar-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -78,7 +78,6 @@
             width: 100%;
             margin: 0 auto;
             background-color: black;
-
         }
 
         .d-flex {
@@ -97,22 +96,20 @@
         .form-container {
             max-width: 500px;
             margin: auto;
-            opacity: 50%;
             padding: 20px;
+            opacity: 0.9;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
         .form-container form {
             opacity: 0.9;
         }
 
-        body,
-        canvas {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+        body, html {
             margin: 0;
             padding: 0;
+            height: 100%;
+            overflow-y: auto; /* Enables scrolling */
+            position: relative;
         }
 
         .center-stats {
@@ -140,14 +137,6 @@
             background-color: black;
         }
 
-        .center-div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-        }
-
         .table {
             margin: 0;
             text-align: center;
@@ -163,11 +152,27 @@
             /* Set the height of your footer */
         }
 
-        .flex-container {
+        .center-div, .flex-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            flex-direction: column; /* Stack elements vertically */
+            align-items: flex-start; /* Align items to the top-left */
+            width: 100%;
+            padding-top: 20px; /* Optional padding from the top */
+        }
+        .buttonred {
+            display: block;
+            font-size: 20px;
+            width: 100%;
+            padding: 20px;
+            background-color: #751212;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .buttonred:hover {
+            background-color: #c11515;
         }
 
         .center-text {

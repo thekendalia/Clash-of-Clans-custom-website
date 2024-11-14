@@ -38,10 +38,13 @@
     </form>
     <div class="center-text">
         <br>
-    <h5 style="color:white; justify-content:center">Need to create an account?</h5>
-    <a type="button" class="btn btn-light" href="/create" role="button">Signup</a>
-    <h5 style="color:white; justify-content:center">Forgot Password?</h5>
-    <a type="button" class="btn btn-light" href="/forgot_password" role="button">Reset Password</a>
+        <h3 style="color:white; margin: 0;">Or</h3>
+        <br>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+            <a type="button" class="buttonred" href="/create" role="button">Signup</a>
+            <a type="button" class="buttonred" href="/forgot_password" role="button">Reset Password</a>
+        </div>
+        
     </div>
 </div>
 
@@ -153,6 +156,7 @@
     z-index: 10;
     background-color: black;
     padding: 20px;
+    margin-top: 83px;
     border-radius: 10px;
     width: 40%;
     max-width: 600px;
@@ -170,6 +174,7 @@ label {
 
 input[type="text"],
 input[type="email"],
+input[type="password"],
 .form-select {
     width: 100%;
     padding: 10px;
@@ -183,6 +188,7 @@ button {
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        font-family: "Lalezar", system-ui;
     }
 
     button:hover {
