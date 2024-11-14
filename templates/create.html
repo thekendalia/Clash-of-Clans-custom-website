@@ -4,8 +4,9 @@
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <div class="form-overlay mobile-padding">
 	<div class="center-text">
+        <h3>Create an account</h3>
         {% if message %}
-    <p id="fadeMessage" style="color:#ffffff">{{ message }}</p>
+    <p id="fadeMessage" style="color:#ff0000">{{ message }}</p>
     <script>
         setTimeout(function() {
             var fadeTarget = document.getElementById("fadeMessage");
@@ -23,7 +24,6 @@
         }, 5000);
     </script>
 {% endif %}
-        <h3>Create an account</h3>
     </div>
     <form id="infoForm" method="post" action="/createacc">
         <div class="form-group">
@@ -182,7 +182,7 @@ button {
         display: block;
         width: 100%;
         padding: 20px;
-        background-color: #751212;
+        background-color: #B00812;
         color: white;
         border: none;
         border-radius: 5px;
@@ -191,7 +191,7 @@ button {
     }
 
     button:hover {
-        background-color: #c11515;
+        background-color: #751212;
     }
 
 /* Media query for screens with a max-width of 768px */

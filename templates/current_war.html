@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div style="padding-top: 12%;" class="form-overlay mobile-padding">
+<div style="padding-top: 3%;" class="form-overlay mobile-padding">
     <div class="center-div">
         <div class="container-fluid">
             <div class="row" style="color: white; text-align: center;">
@@ -12,19 +12,19 @@
                     <h2 style="font-size: 15px;">{{ clan.clan.name }}</h2>
                     <br>
                     <h3>Stars: {{ clan.clan.stars }}</h3>
-                    <h5 style="color:#751212"><b>Attack Totals</b></h5>
+                    <h5 style="color:#B00812"><b>Attack Totals</b></h5>
                     <h6>Attacks Used: {{clan.clan.attacks}} </h6>
                     <h6>Attacks Won: {{clan.clan.attacks - zero}}</h6>
                     <h6>Attacks Lost: {{zero}}</h6>
                     <h6>Attacks Remaining: {{ (clan.teamSize * 2) - clan.clan.attacks}}</h6>
                     <br>
-                    <h5 style="color:#751212"><b>Best Attacks</b></h5>
+                    <h5 style="color:#B00812"><b>Best Attacks</b></h5>
                     <h6>3 Stars: {{three}}</h6>
                     <h6>2 Stars: {{two}}</h6>
                     <h6>1 Stars: {{one}}</h6>
                     <h6>0 Stars: {{zero}}</h6>
                     <br>
-                    <h5 style="color:#751212"><b>Attack Stats</b></h5>
+                    <h5 style="color:#B00812"><b>Attack Stats</b></h5>
                     <h6>New Stars per attack: {{ 0 if clan.clan.attacks == 0 else ((three * 3 + two * 2 + one * 1) /
                         clan.clan.attacks) | round(2) }}
                     </h6>
@@ -38,19 +38,19 @@
                     <h2 style="font-size: 15px;">{{ clan.opponent.name }}</h2>
                     <br>
                     <h3>Stars: {{ clan.opponent.stars }}</h3>
-                    <h5 style="color:#751212"><b>Attack Totals</b></h5>
+                    <h5 style="color:#B00812"><b>Attack Totals</b></h5>
                     <h6>Attacks Used: {{clan.opponent.attacks}}</h6>
                     <h6>Attacks Won: {{clan.opponent.attacks - oppzero}}</h6>
                     <h6>Attacks Lost: {{oppzero}}</h6>
                     <h6>Attacks Remaining: {{ (clan.teamSize * 2) - clan.opponent.attacks}}</h6>
                     <br>
-                    <h5 style="color:#751212"><b>Best Attacks</b></h5>
+                    <h5 style="color:#B00812"><b>Best Attacks</b></h5>
                     <h6>3 Stars: {{oppthree}}</h6>
                     <h6>2 Stars: {{opptwo}}</h6>
                     <h6>1 Stars: {{oppone}}</h6>
                     <h6>0 Stars: {{oppzero}}</h6>
                     <br>
-                    <h5 style="color:#751212"><b>Attack Stats</b></h5>
+                    <h5 style="color:#B00812"><b>Attack Stats</b></h5>
                     <h6>New Stars per attack: {{ 0 if clan.opponent.attacks == 0 else ((oppthree * 3 + opptwo * 2 +
                         oppone * 1) / clan.opponent.attacks) | round(2) }}</h6>
                     <h6>Av Destruction: {{ clan.opponent.destructionPercentage }}%</h6>
@@ -60,15 +60,14 @@
         </div>
     </div>
 
-    <!-- Wide container for additional info with a 3-column layout -->
-    <h3 style="color:white">{{ clan.clan.name }} Members</h3>
+    <h3 style="color:white">{{ clan.clan.name }} Attacks</h3>
     <div id="table-wrapper">
         <div id="table-scroller">
             <table class="table">
                 <thead>
                     <tr>
-                        <th style="color:white" scope="col">{{ clan.clan.name }}</th>
-                        <th style="color:white" scope="col">Attacks</th>
+                        <th style="color:white" scope="col">{{ clan.clan.name }} Members</th>
+                        <th style="color:white" scope="col">Attacks Left</th>
                     </tr>
                 </thead>
                 <tbody class="scrollable-tbody">
@@ -119,182 +118,146 @@
 </div>
 
 
-
-
-
-
-<script>
-    var rawDate = "{{ clan.preparationStartTime }}";
-    // Convert to more standard ISO 8601 format: '2024-04-19T15:58:36.000Z'
-    var formattedDate = rawDate.slice(0, 4) + '-' + rawDate.slice(4, 6) + '-' + rawDate.slice(6, 8) +
-        'T' + rawDate.slice(9, 11) + ':' + rawDate.slice(11, 13) + ':' + rawDate.slice(13);
-
-    var countDownDate = new Date(formattedDate).getTime();
-
-    var countdownFunction = setInterval(function () {
-        var now = new Date().getTime();
-        var distance = countDownDate - now;
-
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById("countdown-start").innerHTML = days + "d " + hours + "h "
-            + minutes + "m " + seconds + "s ";
-
-        if (distance < 0) {
-            clearInterval(countdownFunction);
-            document.getElementById("countdown-start").innerHTML = "EXPIRED";
-        }
-    }, 1000);
-
-    var rawDate = "{{ clan.endTime }}";
-    // Convert to more standard ISO 8601 format: '2024-04-19T15:58:36.000Z'
-    var formattedDate = rawDate.slice(0, 4) + '-' + rawDate.slice(4, 6) + '-' + rawDate.slice(6, 8) +
-        'T' + rawDate.slice(9, 11) + ':' + rawDate.slice(11, 13) + ':' + rawDate.slice(13);
-
-    var countDownDate = new Date(formattedDate).getTime();
-
-    var countdownFunction = setInterval(function () {
-        var now = new Date().getTime();
-        var distance = countDownDate - now;
-
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById("countdown-timer").innerHTML = hours + "h "
-            + minutes + "m " + seconds + "s ";
-
-        if (distance < 0) {
-            clearInterval(countdownFunction);
-            document.getElementById("countdown-timer").innerHTML = "EXPIRED";
-        }
-    }, 1000);
-
-    var maxx = document.body.clientWidth;
-    var maxy = document.body.clientHeight;
-    var halfx = maxx / 2;
-    var halfy = maxy / 2;
-    var canvas = document.createElement("canvas");
-    document.body.appendChild(canvas);
-    canvas.width = maxx;
-    canvas.height = maxy;
-    var context = canvas.getContext("2d");
-    var dotCount = 200;
-    var dots = [];
-    for (var i = 0; i < dotCount; i++) {
-        dots.push(new dot());
-    }
-
-    function render() {
-        context.fillStyle = "#000000";
-        context.fillRect(0, 0, maxx, maxy);
-        for (var i = 0; i < dotCount; i++) {
-            dots[i].draw();
-            dots[i].move();
-        }
-        requestAnimationFrame(render);
-    }
-
-    function dot() {
-
-        this.rad_x = 2 * Math.random() * halfx + 1;
-        this.rad_y = 1.2 * Math.random() * halfy + 1;
-        this.alpha = Math.random() * 360 + 1;
-        this.speed = Math.random() * 100 < 50 ? 1 : -1;
-        this.speed *= 0.1;
-        this.size = Math.random() * 5 + 1;
-        this.color = Math.floor(Math.random() * 256);
-
-    }
-
-    dot.prototype.draw = function () {
-
-        var dx = halfx + this.rad_x * Math.cos(this.alpha / 180 * Math.PI);
-        var dy = halfy + this.rad_y * Math.sin(this.alpha / 180 * Math.PI);
-        context.fillStyle = "rgb(" + this.color + "," + this.color + "," + this.color + ")";
-        context.fillRect(dx, dy, this.size, this.size);
-
-    };
-    dot.prototype.move = function () {
-
-        this.alpha += this.speed;
-        if (Math.random() * 100 < 50) {
-            this.color += 1;
-        } else {
-            this.color -= 1;
-        }
-
-    };
-    render();
-</script>
 <style>
     .form-overlay {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -30%);
-        z-index: 10;
+        position: relative;
+        top: 0;
+        left: 0;
         padding: 20px;
-        border-radius: 10px;
-        width: 40%;
-        max-width: 600px;
+        width: 100%;
+        max-width: 1200px;
+        /* Adjust the max width for larger screens */
+        margin: 0 auto;
+        z-index: 1000;
+        /* Ensures the content sits above the background */
     }
 
-    .form-group {
+    .header-section {
+        display: flex;
+        align-items: center;
         margin-bottom: 20px;
     }
 
-    label {
-        display: block;
+    .clan-badge {
+        width: 128px;
+        height: 128px;
+        margin-right: 15px;
+    }
+
+    .clan-name {
+        color: white;
+        font-size: 2em;
+    }
+
+    .description-section,
+    .warlog-section {
+        margin-top: 20px;
+    }
+
+    .section-title {
+        color: white;
+        font-size: 1.5em;
         margin-bottom: 10px;
     }
 
-    input[type="text"],
-    input[type="email"],
-    .form-select {
-        width: 100%;
-        padding: 10px;
+    .stats-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
     }
 
-    button {
-        display: block;
+    .stats-box {
+        width: 48%;
+        /* Ensure each stats box takes up about half the space */
+        border: 1px solid black;
+        padding: 15px;
+        text-align: center;
+        background-color: #2c2c2c;
+    }
+
+    .stats-title {
+        color: #B00812;
+        font-weight: bold;
+    }
+
+    .warlog-section {
+        margin-top: 30px;
+    }
+
+    .table {
         width: 100%;
-        padding: 20px;
-        background-color: #751212;
         color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
+        border-collapse: collapse;
     }
 
-    button:hover {
-        background-color: #c11515;
+    .table th,
+    .table td {
+        padding: 8px;
+        text-align: center;
     }
 
-    /* Media query for screens with a max-width of 768px */
+    .table th {
+        color: #B00812;
+    }
+
+    .table td {
+        border-top: 1px solid white;
+    }
+
+    .description-section {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        /* Horizontally center the content */
+        align-items: center;
+        /* Vertically center the content */
+        height: 200px;
+        /* Adjust this height as needed to center the content within its container */
+    }
+
+    .centered-content {
+        text-align: center;
+        /* Center text within the div */
+        color: white;
+        /* Make the text white */
+    }
+
+    .description-section h1 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .description-section p {
+        font-size: 1em;
+    }
+
+
     @media (max-width: 768px) {
         .form-overlay {
-            padding: 5%;
-            /* Adjust this value as needed for mobile devices */
-            width: 80%;
+            width: 90%;
+            padding: 15px;
         }
 
-        button {
-            display: block;
+        .stats-container {
+            flex-direction: column;
+        }
+
+        .stats-box {
             width: 100%;
-            padding: 20px;
-            background-color: #751212;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            margin-bottom: 15px;
         }
 
-        button:hover {
-            background-color: #c11515;
+        .clan-name {
+            font-size: 1.5em;
+        }
+
+        .section-title {
+            font-size: 1.2em;
+        }
+
+        .table td,
+        .table th {
+            font-size: 0.9em;
         }
     }
 </style>

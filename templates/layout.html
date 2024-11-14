@@ -108,7 +108,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow-y: auto; /* Enables scrolling */
+            overflow-y: auto;
             position: relative;
         }
 
@@ -164,7 +164,7 @@
             font-size: 20px;
             width: 100%;
             padding: 20px;
-            background-color: #751212;
+            background-color: #B00812;
             color: white;
             border: none;
             border-radius: 5px;
@@ -172,7 +172,22 @@
             margin-bottom: 20px;
         }
         .buttonred:hover {
-            background-color: #c11515;
+            background-color: #751212;
+        }
+        .buttonrednav {
+            display: block;
+            font-size: 15px;
+            width: 100%;
+            padding: 5px;
+            background-color: #B00812;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .buttonrednav:hover {
+            background-color: #751212;
         }
 
         .center-text {
@@ -262,7 +277,7 @@
         <div class="container-fluid justify-content-center justify-content-lg-between">
             <!-- Logo hidden on xs to md, visible on lg and above -->
             <a class="navbar-brand d-flex align-items-center d-none d-lg-flex" href="/">
-                <img src="/static/images/DarkRose.gif" alt="Logo" style="height: 50px;">
+                <img src="/static/images/darkroseicon.png" alt="Logo" style="height: 50px;">
             </a>
             <!-- Toggle button centered on all views, but especially for mobile -->
             <button class="navbar-toggler btn btn-outline-light mx-auto new-custom-navbar-color" type="button"
@@ -274,7 +289,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Centered brand for mobile view -->
                 <div class="d-lg-none text-center my-2">
-                    <a class="navbar-brand" style="color: white;" aria-current="page">Dark Rose CWL Signup</a>
+                    <a class="navbar-brand" style="color: white;" aria-current="page">Dark Rose</a>
                 </div>
                 <!-- Admin Login button for mobile view, centered -->
                 {% if not no_header %}
@@ -283,14 +298,14 @@
                 {% endif %}
                 {% if not no_search_bar %}
                 <div class="d-lg-none text-center my-2">
-                    <a class="btn btn-outline-light" href="/" role="button">Home</a>
+                    <a class="buttonrednav" href="/" role="button">Home</a>
                     <!--<a class="btn btn-outline-light" href="#" role="button" data-bs-toggle="modal"
                         data-bs-target="#adminLoginModal">Admin Login</a> -->
                 </div>
                 {% endif %}
                 {%if homeie %}
                 <div class="d-lg-none text-center my-2">
-                    <a class="btn btn-outline-light" href="/" role="button">Home</a>
+                    <a class="buttonrednav" href="/" role="button">Home</a>
                 </div>
                 {% endif %}
                 <!-- Additional navbar content for larger screens -->
@@ -304,12 +319,12 @@
                     </div>
                     {% endif %}
                     {% if not no_search_bar %}
-                    <a class="btn btn-outline-light" href="/" role="button">Home</a>
+                    <a class="buttonrednav" href="/" role="button">Home</a>
                     <!--<a class="btn btn-outline-light" href="#" role="button" data-bs-toggle="modal"
                         data-bs-target="#adminLoginModal">Admin Login</a>-->
                     {% endif %}
                     {% if homeie %}
-                    <a class="btn btn-outline-light" href="/" role="button">Home</a>
+                    <a class="buttonrednav" href="/" role="button">Home</a>
                     {% endif %}
                 </div>
             </div>

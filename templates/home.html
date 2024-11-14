@@ -4,7 +4,7 @@
 <div class="form-overlay mobile-padding">
 	<div class="center-text">
         {% if message %}
-    <p id="fadeMessage" style="color:#ebd2d2">{{ message }}</p>
+    <p id="fadeMessage" style="color:#ff0000">{{ message }}</p>
     <script>
         setTimeout(function() {
             var fadeTarget = document.getElementById("fadeMessage");
@@ -23,7 +23,7 @@
     </script>
 {% endif %}
     {% if username == 'admin' %}  
-    <h1>Welcome, <b style="color:#751212">{{username}}!</b></h1>
+    <h1>Welcome, <b style="color:#B00812">{{username}}!</b></h1>
     <h6>Watching {{ nummems }} members</h6>
     <br>
     <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
@@ -33,7 +33,7 @@
     </div>
     <a class="buttonred" href="/logout" role="button">Sign Out</a>  
     {% elif username is not none %}  
-    <h1>Welcome, <b style="color:#751212">{{username}}</b></h1>
+    <h1>Welcome, <b style="color:#B00812">{{username}}</b></h1>
     <h6>Watching {{ nummems }} members</h6>
     <br>
     <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
@@ -47,7 +47,7 @@
     </div>
     {% else %}
     <h6 style="font-size:35px">Welcome to</h6>
-	<h1 style="color:#751212; font-size:75px">Dark Rose</h1>
+	<h1 style="color:#B00812; font-size:75px">Dark Rose</h1>
     <h6 style="font-size:20px">Watching {{ nummems }} members</h6>
     <!--<a class="btn btn-outline-light" href="/" role="button">Apply to Join</a>--> 
     <a type="button" class="buttonred" href="/clanstats" role="button">Clan Stats</a> 
