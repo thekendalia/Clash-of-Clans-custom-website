@@ -3,21 +3,15 @@
 {% block content %}
 <link rel="stylesheet" href="styles.css">
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        margin: 0;
-        padding: 20px;
-        background-color: #000000;
-    }
 
     .container {
         max-width: 600px;
         margin: auto;
-        background: rgb(140, 140, 140);
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        font-family: "Lalezar", system-ui;
+        color:#ffffff;
     }
 
     h1 {
@@ -29,39 +23,128 @@
         margin-bottom: 20px;
     }
 
-    .account-info label {
-        font-weight: bold;
-    }
-
     .random-info {
-        background-color: rgb(140, 140, 140);
+        background-color: rgb(75, 75, 75);
         padding: 10px;
         border-radius: 5px;
         margin-top: 10px;
+    }
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 300px;
+        text-align: center;
+        border-radius: 8px;
+    }
+    
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
     }
 </style>
 </head>
 <div class="container">
     <br>
-    <br>
-    <br>
-    <h1>{{username}}'s Account</h1>
+    <h1 style="color:#ffffff">{{username}}'s Account</h1>
     <div class="account-info">
         <label for="account-name">Username:</label>
         <p id="account-name">{{username}}</p>
         <label for="account-name">Email:</label>
         <p id="account-name">{{email}}</p>
     </div>
-
+{% if player == "Not Set"%}
 
     <div class="random-info">
-        <h2>Random Information</h2>
+        <h2 style="color:#ffffff">Clash Stats</h2>
         <ul>
-            <li><strong>Email:</strong> john.doe@example.com</li>
-            <li><strong>Phone Number:</strong> (123) 456-7890</li>
-            <li><strong>Join Date:</strong> January 1, 2020</li>
-            <li><strong>Location:</strong> New York, USA</li>
+            <li>Tag: Not Set</li>
         </ul>
+        <div class="center-text">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+                <a type="button" class="buttonred" id="deleteButton" role="button">Delete Account</a>
+            </div>
+        </div>
+        <div id="confirmationModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 style="color:#B00812;">Confirm Deletion</h2>
+                <p style="color:#B00812;">Are you sure you want to delete your account? This action cannot be undone.</p>
+                <a class="buttonred" href="/delete">Yes, Delete</a>
+                <button id="cancelDelete" class="buttongray">Cancel</button>
+            </div>
+        </div>
     </div>
+    {% else %}
+    <div class="random-info">
+        <h2 style="color:#ffffff">Clash Stats</h2>
+        <ul>
+            <li>Tag: #{{tag}}</li>
+            <li>Player Name: {{ player.name }}</li>
+            <li>Town Hall Level: {{ player.townHallLevel }}</li>
+            <li>Trophies: {{ player.trophies }}</li>
+            <li>Highest Trophies: {{ player.bestTrophies }}</li>
+            <li>Player Level: {{ player.expLevel }}</li>
+        </ul>
+        <div class="center-text">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+                <a type="button" class="buttonred" id="deleteButton" role="button">Delete Account</a>
+            </div>
+        </div>
+        
+        <div id="confirmationModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 style="color:#B00812;">Confirm Deletion</h2>
+                <p style="color:#B00812;">Are you sure you want to delete your account? This action cannot be undone.</p>
+                <a class="buttonred" href="/delete">Yes, Delete</a>
+                <button id="cancelDelete" class="buttongray">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
 </div>
+<script>
+    document.getElementById("deleteButton").onclick = function() {
+        document.getElementById("confirmationModal").style.display = "block";
+    }
+    
+    document.getElementById("cancelDelete").onclick = function() {
+        document.getElementById("confirmationModal").style.display = "none";
+    }
+    
+    document.querySelector(".close").onclick = function() {
+        document.getElementById("confirmationModal").style.display = "none";
+    }
+    
+    // Close the modal if clicked outside the modal content
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("confirmationModal")) {
+            document.getElementById("confirmationModal").style.display = "none";
+        }
+    }
+    
+    // You can add additional functionality for the confirm button here
+    document.getElementById("confirmDelete").onclick = function() {
+        // Proceed with the account deletion logic here
+        alert("Account deleted!");
+        document.getElementById("confirmationModal").style.display = "none";
+    }
+    </script>
 {% endblock %}

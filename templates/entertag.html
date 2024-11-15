@@ -3,6 +3,7 @@
 {% block content %}
 <div class="form-overlay mobile-padding">
 	<div class="center-text">
+        <h3>Enter Account Tag</h3>
         {% if message %}
     <p id="fadeMessage" style="color:#ff0000">{{ message }}</p>
     <script>
@@ -22,38 +23,23 @@
         }, 5000);
     </script>
 {% endif %}
-    {% if username == 'admin' %}  
-    <h1>Welcome, <b style="color:#B00812">{{username}}!</b></h1>
-    <h6>Watching {{ nummems }} members</h6>
-    <br>
-    <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-        <a class="buttonred" href="/admin" role="button">Signup History</a>  
-        <a class="buttonred" href="/clanstats" role="button">Clan Stats</a>  
-        <a class="buttonred" href="/currentwar" role="button">War</a> 
     </div>
-    <a class="buttonred" href="/logout" role="button">Sign Out</a>  
-    {% elif username is not none %}  
-    <h1>Welcome, <b style="color:#B00812">{{username}}</b></h1>
-    <h6>Watching {{ nummems }} members</h6>
-    <br>
-    <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-        <a class="buttonred" href="/cwl" role="button">War Signup</a>  
-        <a class="buttonred" href="/clanstats" role="button">Clan Stats</a>  
-        <a class="buttonred" href="/currentwar" role="button">War</a> 
+    <form id="infoForm" method="post" action="/accounttag">
+        <div class="form-group">
+            <label style="color: white;" for="username">Please enter your clash of clans account tag (Optional).</label>
+            <input type="text" id="username" placeholder="#8G89JLV2C" name="tag" autocomplete="off">
+
+        </div>
+        <button type="submit">Submit Tag</button>
+    </form>
+    <div class="center-text">
+        <h3 style="margin-top:10px;">Or</h3>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-top:10px;">
+            <a type="button" class="buttonred" href="/accountskip" role="button">Skip</a>
+        </div>
+        
     </div>
-    <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-        <a class="buttonred" href="/account" role="button">Account</a>
-        <a class="buttonred" href="/logout" role="button">Sign Out</a> 
-    </div>
-    {% else %}
-    <h6 style="font-size:35px">Welcome to</h6>
-	<h1 style="color:#B00812; font-size:75px">Dark Rose</h1>
-    <h6 style="font-size:20px">Watching {{ nummems }} members</h6>
-    <!--<a class="btn btn-outline-light" href="/" role="button">Apply to Join</a>--> 
-    <a type="button" class="buttonred" href="/clanstats" role="button">Clan Stats</a> 
-    <a type="button" class="buttonred" href="/login" role="button">Log in</a>  
-    {% endif %}
-    </div>
+
 </div>
 
 
@@ -189,15 +175,16 @@ button {
         display: block;
         width: 100%;
         padding: 20px;
-        background-color: #751212;
+        background-color: #B00812;
         color: white;
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        font-family: "Lalezar", system-ui;
     }
 
     button:hover {
-        background-color: #c11515;
+        background-color: #751212;
     }
 
 /* Media query for screens with a max-width of 768px */
@@ -226,3 +213,26 @@ button {
 
 </style>
 {% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminLoginModalLabel">Admin Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminLoginForm" action="/adminlogin" method="post">
+                        <div class="mb-3">
+                            <label for="adminPassword" class="form-label">Password</label>
+                            <input type="password" name="adminpass" class="form-control" id="adminPassword" required>
+                        </div>
+                        <button type="submit" color="#751212">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

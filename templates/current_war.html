@@ -28,7 +28,7 @@
                     <h6>New Stars per attack: {{ 0 if clan.clan.attacks == 0 else ((three * 3 + two * 2 + one * 1) /
                         clan.clan.attacks) | round(2) }}
                     </h6>
-                    <h6>Av Destruction: {{ clan.clan.destructionPercentage }}%</h6>
+                    <h6>Damage Done: {{ clan.clan.destructionPercentage }}%</h6>
                 </div>
                 <div class="col-2" style="display: flex; align-items: center; justify-content: center;">
                     <h3>vs.</h3>
@@ -53,8 +53,16 @@
                     <h5 style="color:#B00812"><b>Attack Stats</b></h5>
                     <h6>New Stars per attack: {{ 0 if clan.opponent.attacks == 0 else ((oppthree * 3 + opptwo * 2 +
                         oppone * 1) / clan.opponent.attacks) | round(2) }}</h6>
-                    <h6>Av Destruction: {{ clan.opponent.destructionPercentage }}%</h6>
+                    <h6>Damage Done: {{ clan.opponent.destructionPercentage }}%</h6>
+                    <br>
 
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    {% if clan.clan.stars > clan.opponent.stars %}
+                    <h2>We're up by {{ clan.clan.stars - clan.opponent.stars }} stars!</h2>
+                    {% else %}
+                    <h2>We're down by {{ clan.opponent.stars - clan.clan.stars }} stars!</h2>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -103,18 +111,46 @@
     </div>
     {% endif %}
     {% if clan.state == "warEnded" %}
-    <div style="justify-content:center; padding-bottom:60%;">
-        <h3 style="justify-content:center; background-color:#751212; color:white">Not currently in war!</h3>
-    </div>
+    <div class="center-text">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-top:10px;">
+            <h3>Not currently in war!</h3>
+        </div>
+        <br>
+        <h3>Last war stats:</h3>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <!-- Left Clan Info -->
+            <div class="col-2" style="display: flex; flex-direction: column; align-items: center; margin-left:210px">
+                <img src="{{ clan.clan.badgeUrls.medium }}" alt="Clan Badge" style="width:128px; height:128px;">
+                <h2 style="font-size: 15px; text-align: center;">{{ clan.clan.name }}</h2>
+                <h3 style="text-align: center;">Stars: {{ clan.clan.stars }}</h3>
+                <h6 style="text-align: center;">Damage Done: {{ clan.clan.destructionPercentage }}%</h6>
+            </div>
 
-    {% endif %}
-    {% if clan.state == "notInWar" %}
-    <div style="justify-content:center; padding-bottom:60%;">
-        <h3 style="justify-content:center; background-color:#751212; color:white">Not currently in war!</h3>
-    </div>
+            <!-- Center "VS" Text -->
+            <div style="font-size: 24px; font-weight: bold; text-align: center; margin-left:40px">
+                VS
+            </div>
 
-    {% endif %}
-</div>
+            <!-- Right Clan Info (Opponent) -->
+            <div class="col-5"
+                style="display: flex; flex-direction: column; align-items: center; border: 1px solid black;">
+                <img src="{{ clan.opponent.badgeUrls.medium }}" alt="Clan Badge" style="width:128px; height:128px;">
+                <h2 style="font-size: 15px; text-align: center;">{{ clan.opponent.name }}</h2>
+                <h3 style="text-align: center;">Stars: {{ clan.opponent.stars }}</h3>
+                <h6 style="text-align: center;">Damage Done: {{ clan.opponent.destructionPercentage }}%</h6>
+            </div>
+        </div>
+
+        {% endif %}
+        {% if clan.state == "notInWar" %}
+        <div class="center-text">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-top:10px;">
+                <h3>Not currently in war!</h3>
+            </div>
+        </div>
+
+        {% endif %}
+    </div>
 </div>
 
 

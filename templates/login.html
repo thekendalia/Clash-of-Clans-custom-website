@@ -42,7 +42,7 @@
         <br>
         <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
             <a type="button" class="buttonred" href="/create" role="button">Signup</a>
-            <a type="button" class="buttonred" href="/forgot_password" role="button">Reset Password</a>
+            <a type="button" class="buttonred" href="/passreset" role="button">Reset Password</a>
         </div>
         
     </div>
@@ -221,26 +221,3 @@ button {
 
 </style>
 {% endblock %}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="adminLoginModalLabel">Admin Login</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="adminLoginForm" action="/adminlogin" method="post">
-                        <div class="mb-3">
-                            <label for="adminPassword" class="form-label">Password</label>
-                            <input type="password" name="adminpass" class="form-control" id="adminPassword" required>
-                        </div>
-                        <button type="submit" color="#751212">Login</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>

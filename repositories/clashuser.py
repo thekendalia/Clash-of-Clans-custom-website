@@ -53,9 +53,25 @@ def new_account(uname: str, cname: str, password: str):
     pool = get_pool()
     with pool.connection() as conn:
         with conn.cursor() as cursor:
-            insert_query = """INSERT INTO users (username, email, password, code)
-                              VALUES (%s, %s, %s, 7685);"""
+            insert_query = """INSERT INTO users (username, email, password, code, clan_tag)
+                              VALUES (%s, %s, %s, 7685, 000);"""
             cursor.execute(insert_query, (uname, cname, password))
+            conn.commit()
+            
+def update_clan_tag(clan_tag: str, email: str):  
+    pool = get_pool() 
+    with pool.connection() as conn:  
+        with conn.cursor() as cursor:   
+            update_query = """UPDATE users SET clan_tag = %s WHERE email = %s;"""  
+            cursor.execute(update_query, (clan_tag, email))
+            conn.commit()
+            
+def delete_account(email: str):  
+    pool = get_pool() 
+    with pool.connection() as conn:  
+        with conn.cursor() as cursor:   
+            update_query = """DELETE FROM users where email = %s"""  
+            cursor.execute(update_query, (email,))
             conn.commit()
             
 
@@ -81,16 +97,16 @@ def user_data(email: str):
     pool = get_pool()  
     with pool.connection() as conn:  
         with conn.cursor() as cur:   
-            cur.execute('SELECT id, username, email FROM users WHERE email = %s', (email,))  
+            cur.execute('SELECT id, username, email, clan_tag FROM users WHERE email = %s', (email,))  
             user_record = cur.fetchone()  
             
             if user_record:  
-                user_id, db_username, clash_name = user_record  
+                user_id, db_username, clash_name, clan_tag = user_record  
                 
-                return True, user_id, db_username, clash_name  
+                return True, user_id, db_username, clash_name, clan_tag
                 
             # If the user doesn't exist or password is incorrect  
-            return False, None, None, 'Invalid username or password'
+            return False, None, None, 'Invalid username or password', None
             
 def existingaccount(name: str) -> bool:
     pool = get_pool()
