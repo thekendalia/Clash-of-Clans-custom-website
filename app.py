@@ -83,13 +83,8 @@ def send(code, email):
         msg.attach(
             "clash.gif", "image/gif", fp.read(), headers={"Content-ID": "<image1>"}
         )
-
-    try:
-        mail.send(msg)
-        return "Message sent!"
-    except Exception as e:
-        print("Failed to send email:", e)
-        return "Failed to send email"
+    mail.send(msg)
+    return "Message sent!"
 
 
 
@@ -171,7 +166,7 @@ def login():
 def index():
     member_names.clear()
     sum = 0
-    response = requests.get(url1, headers=headers)  # Use requests.get for clarity
+    response = requests.get(url1, headers=headers)
     if response.status_code == 200:
         clan_info = response.json()
         for member in clan_info.get("items", []):

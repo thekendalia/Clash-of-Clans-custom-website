@@ -118,7 +118,6 @@
         <br>
         <h3>Last war stats:</h3>
         <div style="display: flex; align-items: center; justify-content: space-between;">
-            <!-- Left Clan Info -->
             <div class="col-2" style="display: flex; flex-direction: column; align-items: center; margin-left:210px">
                 <img src="{{ clan.clan.badgeUrls.medium }}" alt="Clan Badge" style="width:128px; height:128px;">
                 <h2 style="font-size: 15px; text-align: center;">{{ clan.clan.name }}</h2>
@@ -126,12 +125,10 @@
                 <h6 style="text-align: center;">Damage Done: {{ clan.clan.destructionPercentage }}%</h6>
             </div>
 
-            <!-- Center "VS" Text -->
             <div style="font-size: 24px; font-weight: bold; text-align: center; margin-left:40px">
                 VS
             </div>
 
-            <!-- Right Clan Info (Opponent) -->
             <div class="col-5"
                 style="display: flex; flex-direction: column; align-items: center; border: 1px solid black;">
                 <img src="{{ clan.opponent.badgeUrls.medium }}" alt="Clan Badge" style="width:128px; height:128px;">
@@ -162,10 +159,8 @@
         padding: 20px;
         width: 100%;
         max-width: 1200px;
-        /* Adjust the max width for larger screens */
         margin: 0 auto;
         z-index: 1000;
-        /* Ensures the content sits above the background */
     }
 
     .header-section {
@@ -204,7 +199,6 @@
 
     .stats-box {
         width: 48%;
-        /* Ensure each stats box takes up about half the space */
         border: 1px solid black;
         padding: 15px;
         text-align: center;
@@ -244,18 +238,13 @@
         margin-top: 20px;
         display: flex;
         justify-content: center;
-        /* Horizontally center the content */
         align-items: center;
-        /* Vertically center the content */
         height: 200px;
-        /* Adjust this height as needed to center the content within its container */
     }
 
     .centered-content {
         text-align: center;
-        /* Center text within the div */
         color: white;
-        /* Make the text white */
     }
 
     .description-section h1 {

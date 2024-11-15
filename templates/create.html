@@ -128,8 +128,6 @@
         context.fillRect(dx, dy, this.size, this.size);
 
     };
-
-    // calc new position in polar coord
     dot.prototype.move = function () {
 
         this.alpha += this.speed;
@@ -141,12 +139,9 @@
         }
 
     };
-
-    // start animation
     render();
 </script>
 <style>
-    /* Style for the form overlay */
     .form-overlay {
     position: absolute;
     top: 50%;
@@ -163,8 +158,6 @@
 .passwidth {
     height: 50px;
 }
-
-/* Additional styling for form elements */
 
 label {
     display: block;
@@ -194,12 +187,10 @@ button {
         background-color: #751212;
     }
 
-/* Media query for screens with a max-width of 768px */
 @media (max-width: 768px) {
     .form-overlay {
-        padding: 5%; /* Adjust this value as needed for mobile devices */
-        width: 80%; /* Optionally adjust the width for mobile devices */
-        /* You can also set a specific padding value like 20px if percentage-based padding is not suitable */
+        padding: 5%;
+        width: 80%;
     }
 
     button {

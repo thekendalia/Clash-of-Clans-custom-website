@@ -78,8 +78,7 @@ def delete_account(email: str):
 def login_user(username: str, userpass: str):   
     pool = get_pool()  
     with pool.connection() as conn:  
-        with conn.cursor() as cur:   
-            # Correctly using OR in the WHERE clause  
+        with conn.cursor() as cur: 
             cur.execute('SELECT id, username, email, password FROM users WHERE username = %s OR email = %s', (username, username))  
             user_record = cur.fetchone()  
             
@@ -88,9 +87,7 @@ def login_user(username: str, userpass: str):
                 
                 user_bytes = userpass.encode('utf-8')  
                 if bcrypt.checkpw(user_bytes, hashed_password.encode('utf-8')):  
-                    return True, user_id, db_username, clash_name  
-                
-            # If the user doesn't exist or password is incorrect  
+                    return True, user_id, db_username, clash_name
             return False, None, None, 'Invalid username or password'
         
 def user_data(email: str):   
@@ -104,8 +101,6 @@ def user_data(email: str):
                 user_id, db_username, clash_name, clan_tag = user_record  
                 
                 return True, user_id, db_username, clash_name, clan_tag
-                
-            # If the user doesn't exist or password is incorrect  
             return False, None, None, 'Invalid username or password', None
             
 def existingaccount(name: str) -> bool:
