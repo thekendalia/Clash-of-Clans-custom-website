@@ -3,11 +3,10 @@
 
 Make a custom website for your clash of clans clan
  - Members can register for CWL or clan war
+ - Members can create an account and view their clash stats
  - Display clan stats, and warlog
  - Database to keep track of members when they opt-in/opt-out
  - Uses Clash of Clans API to track and display clan data like clan member count, warlog... etc
-
-![Home Page](https://media.discordapp.net/attachments/862445732534550529/1229631965246783541/github-MadewithClipchamp-ezgif.com-video-to-gif-converter.gif?ex=66325d41&is=66310bc1&hm=1c879b0ca6561ea8f5fb969636a19cb720078e271947f4767f1e8f3232bde326&=&width=1000&height=437)
 
 ## Installation
 
@@ -49,12 +48,22 @@ Next lets create a database!
 ```sql
 CREATE DATABASE database_name;
 ```
-Once you run "**CREATE DATABASE database_name**" delete that and then paste and run the following to make a table
+Once you run "**CREATE DATABASE database_name**" delete that and then paste and run the following to make a tables
 ```sql
 CREATE TABLE IF NOT EXISTS clash (
     id SERIAL,
     clashname VARCHAR(255) NOT NULL,
     optin BOOLEAN NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL,
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    code int,
+    clan_tag VARCHAR(255),
     PRIMARY KEY (id)
 );
 ```
