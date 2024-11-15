@@ -8,6 +8,8 @@ Make a custom website for your clash of clans clan
  - Database to keep track of members when they opt-in/opt-out
  - Uses Clash of Clans API to track and display clan data like clan member count, warlog... etc
 
+ ![darkrose](https://github.com/user-attachments/assets/f6f086b9-2be9-44ac-b030-0492e346fa94)
+
 ## Installation
 
 Download/Clone the project, open in vscode
