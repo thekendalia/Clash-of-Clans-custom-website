@@ -60,8 +60,10 @@
                 <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
                     {% if clan.clan.stars > clan.opponent.stars %}
                     <h2>We're up by {{ clan.clan.stars - clan.opponent.stars }} stars!</h2>
-                    {% else %}
+                    {% elif clan.clan.stars < clan.opponent.stars %}
                     <h2>We're down by {{ clan.opponent.stars - clan.clan.stars }} stars!</h2>
+                    {% else %}
+                    <h2>War is tied, at {{ clan.opponent.stars}} stars</h2>
                     {% endif %}
                 </div>
             </div>
