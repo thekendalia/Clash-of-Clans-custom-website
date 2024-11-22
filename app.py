@@ -21,6 +21,7 @@ from repositories.clashuser import delete_clash_users
 from repositories.clash import get_member_th_level
 from flask import Flask
 from flask_mail import Mail, Message
+from twilio.rest import Client
 
 load_dotenv()
 
@@ -49,6 +50,17 @@ my_dict = []
 choice = []
 isname = []
 user = {}
+
+
+client = Client(os.getenv("account_sid"), os.getenv("auth_token"))
+
+message = client.messages.create(
+  from_='+18667831078',
+  body='Hello from Twilio',
+  to='+18777804236'
+)
+
+print(message.sid)
 
 app.config["MAIL_SERVER"] = "live.smtp.mailtrap.io"
 app.config["MAIL_PORT"] = 587
@@ -112,14 +124,14 @@ def home():
 @app.get("/create")
 def create():
     message = request.args.get("message", "")
-    sitekey = "6LdO-XwqAAAAAAWTnkO7GBmuDIrO5zT6DzAmj6dy"
+    sitekey = os.getenv("sitekey")
     return render_template("create.html", message=message, sitekey=sitekey)
 
 
 @app.get("/passreset")
 def passreset():
     message = request.args.get("message", "")
-    sitekey = "6LdO-XwqAAAAAAWTnkO7GBmuDIrO5zT6DzAmj6dy"
+    sitekey = os.getenv("sitekey")
     return render_template("reset.html", message=message, sitekey=sitekey)
 
 
@@ -149,7 +161,7 @@ def forgot_password():
 
 def is_human(captcha_response):
 
-    secret = "6LdO-XwqAAAAALi_SjY45V8_AC7FQ-441ADJPPrV"
+    secret = os.getenv("secret")
     payload = {"response": captcha_response, "secret": secret}
     response = requests.post("https://www.google.com/recaptcha/api/siteverify", payload)
     response_text = json.loads(response.text)

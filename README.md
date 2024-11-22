@@ -8,7 +8,7 @@ Make a custom website for your clash of clans clan
  - Database to keep track of members when they opt-in/opt-out
  - Uses Clash of Clans API to track and display clan data like clan member count, warlog... etc
 
- ![darkrose](https://github.com/user-attachments/assets/f6f086b9-2be9-44ac-b030-0492e346fa94)
+![DarkRose](https://github.com/user-attachments/assets/6b38a4e2-5bf9-4575-b5e2-c043d6809645)
 
 ## Installation
 
@@ -32,7 +32,7 @@ pip install -r requirements.txt
 ```
 
 ## .env setup
-After cloning the project create a .env in the main project folder and put these 5 things in there
+After cloning the project create a .env in the main project folder and put these 8 things in there
 
 ```
 DATABASE_URL=
@@ -40,6 +40,9 @@ CLASH_API=
 clantag=%23YVOURJQG
 adminpassword=
 secretkey=
+sitekey=
+secret=
+mailtrap=
 ```
 
 **DATABASE_URL** - Install [DataGrip](https://www.jetbrains.com/datagrip/download/#section=windows) and [PostgreSQL](https://www.postgresql.org/download/). In DataGrip click the + in the top left corner and click "Data Source" and select PostgreSQL. In the pop-up window **set the password to what you set when installing PostgreSQL and set the user to be postgres**. 
@@ -77,6 +80,14 @@ CREATE TABLE IF NOT EXISTS users (
 **adminpassword** - set password for the admin section
 
 **secretkey** - This just makes a flask app secret key, so put whatever you want here as the key
+
+
+**Setting Sitekey/Secret keys**:
+Click [here](https://www.google.com/recaptcha/about/) to make an account to set up captcha. Register a new site, select **Challenge (v2)** then add domain. Now in the new registered domain select the settings icon then click the reCAPTCHA dropdown and copy the site and secret key into the .env
+
+**mailtrap** - This app utilizes mailtrap API for sending emails to users to reset password. Go to [Mailtrap.com](https://mailtrap.io/sending/domains/c5a4e5ad-b8c0-4437-85d3-8b5e9df032db) make an account then click **Sending Domains**. Add your domain address, then you will have to connect the DNS records. Wherever you bought your domain from (GoDaddy, Namecheap, IONOS) go to the site and find the DNS records tab. Add a new record and copy the Missing records from mailtrap into your DNS records.
+
+**Optional** - I have my domain connected to Cloudflare, you would set up the DNS records on Cloudflare not where you bought your domain.
 
 To run the app type:
 
