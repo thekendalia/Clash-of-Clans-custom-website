@@ -52,15 +52,15 @@ isname = []
 user = {}
 
 
-client = Client(os.getenv("account_sid"), os.getenv("auth_token"))
+#client = Client(os.getenv("account_sid"), os.getenv("auth_token"))
 
-message = client.messages.create(
-  from_='+18667831078',
-  body='Hello from Twilio',
-  to='+18777804236'
-)
+#message = client.messages.create(
+#  from_='+18667831078',
+#  body='Hello from Twilio',
+#  to='+18777804236'
+#)
 
-print(message.sid)
+#print(message.sid)
 
 app.config["MAIL_SERVER"] = "live.smtp.mailtrap.io"
 app.config["MAIL_PORT"] = 587
