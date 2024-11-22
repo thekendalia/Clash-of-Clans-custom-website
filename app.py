@@ -151,11 +151,11 @@ def forgot_password():
         return redirect(url_for("code"))
     elif is_human(captcha_response) == False:
         return redirect(
-            url_for("forgot_password", submitted=True, message="You forgot Captcha!")
+            url_for("passreset", submitted=True, message="You forgot Captcha!")
         )
     else:
         return redirect(
-            url_for("forgot_password", submitted=True, message="Email not registered")
+            url_for("passreset", submitted=True, message="Email not registered")
         )
 
 
